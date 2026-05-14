@@ -1,0 +1,90 @@
+---
+interface Props {
+  official?: string
+  instagram?: string
+  mapUrl?: string
+}
+
+const { official, instagram, mapUrl } = Astro.props
+
+const handle = instagram
+  ? instagram.replace(/\/$/, '').split('/').pop()
+  : null
+---
+
+<div class="sl">
+  {mapUrl && (
+    <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="sl-map">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+      </svg>
+      Google Maps
+    </a>
+  )}
+  <div class="sl-right">
+    {official && (
+      <a href={official} target="_blank" rel="noopener noreferrer" class="sl-official">
+        公式サイト →
+      </a>
+    )}
+    {instagram && (
+      <a href={instagram} target="_blank" rel="noopener noreferrer" class="sl-ig">
+        @{handle}
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+.sl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -16px 0 40px;
+}
+.sl-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sl-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #4285F4;
+  text-decoration: none;
+  border-bottom: none !important;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.sl-map:hover { opacity: 1; }
+.sl-official {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: none !important;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+.sl-official:hover { opacity: 1; }
+.sl-ig {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: none !important;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  padding: 3px 8px;
+  border-radius: 3px;
+  opacity: 0.9;
+  transition: opacity 0.15s;
+}
+.sl-ig:hover { opacity: 1; }
+</style>

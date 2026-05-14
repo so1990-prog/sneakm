@@ -1,0 +1,310 @@
+---
+const navLinks = [
+  { href: '/category/newbalance', label: 'New Balance' },
+  { href: '/category/shoes',      label: 'Shoes' },
+  { href: '/category/bag',        label: 'Bag' },
+  { href: '/category/apparel',    label: 'Apparel' },
+  { href: '/category/favorite',   label: 'Favorite' },
+  { href: '/category/gadget',     label: 'Gadget' },
+]
+---
+
+<header class="site-header">
+  <a href="/" class="logo-link" aria-label="SNEAKm トップへ">
+    <img src="/images/logo.webp" alt="SNEAKm" class="logo-img" />
+  </a>
+  <div class="header-right">
+    <button class="hb-btn" id="menuOpen" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- フルスクリーンオーバーレイメニュー -->
+<div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+  <div class="menu-head">
+    <img src="/images/logo.webp" alt="SNEAKm" class="menu-logo" />
+    <button class="menu-close" id="menuClose" aria-label="メニューを閉じる">
+      <span></span><span></span>
+    </button>
+  </div>
+  <div class="menu-search-wrap">
+    <div class="menu-search-inner">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+      </svg>
+      <input
+        id="menuSearchInput"
+        type="search"
+        placeholder="記事を検索..."
+        autocomplete="off"
+        class="menu-search-input"
+        aria-label="サイト内検索"
+      />
+    </div>
+    <ul id="menuSearchResults" class="search-results" aria-live="polite"></ul>
+  </div>
+
+  <nav class="menu-nav">
+    {navLinks.map(link => (
+      <a href={link.href}>
+        {link.label}
+        <span class="menu-arr" aria-hidden="true">→</span>
+      </a>
+    ))}
+  </nav>
+  <div class="menu-foot">
+    <span>SNEAKm — Personal Archive</span>
+    <span>2025.05 — Tokyo</span>
+  </div>
+</div>
+
+<style>
+.site-header {
+  padding: 24px 32px;
+  border-bottom: 1.5px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+.logo-link { display: block; }
+.logo-img { height: 48px; width: auto; }
+
+.header-right { display: flex; align-items: center; gap: 20px; }
+
+/* ── Hamburger ── */
+.hb-btn {
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 6px;
+  width: 40px; height: 40px;
+  cursor: pointer; background: none; border: none; padding: 6px;
+}
+.hb-btn span {
+  display: block; height: 1.5px; background: var(--ink);
+  transition: transform 0.4s cubic-bezier(.77,0,.18,1),
+              opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+.hb-btn span:nth-child(1) { width: 100%; }
+.hb-btn span:nth-child(2) { width: 66%; }
+.hb-btn span:nth-child(3) { width: 33%; }
+.hb-btn:hover span { width: 100%; }
+.hb-btn.open span:nth-child(1) { width: 100%; transform: translateY(7.5px) rotate(45deg); }
+.hb-btn.open span:nth-child(2) { opacity: 0; width: 0; }
+.hb-btn.open span:nth-child(3) { width: 100%; transform: translateY(-7.5px) rotate(-45deg); }
+
+/* ── Overlay ── */
+.menu-overlay {
+  position: fixed; inset: 0;
+  background: var(--ink); z-index: 200;
+  display: flex; flex-direction: column;
+  padding: 24px 32px 48px;
+  clip-path: circle(0% at calc(100% - 52px) 52px);
+  transition: clip-path 0.6s cubic-bezier(.77,0,.18,1);
+  pointer-events: none;
+}
+.menu-overlay.open {
+  clip-path: circle(150% at calc(100% - 52px) 52px);
+  pointer-events: all;
+}
+.menu-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 20px; margin-bottom: 40px;
+  border-bottom: 1px solid rgba(253,250,245,0.1);
+}
+.menu-logo { height: 40px; width: auto; filter: brightness(0) invert(1); }
+
+.menu-close {
+  width: 40px; height: 40px; cursor: pointer;
+  background: none; border: none; padding: 6px;
+  display: flex; flex-direction: column; gap: 6px; justify-content: center;
+}
+.menu-close span {
+  display: block; width: 100%; height: 1.5px;
+  background: rgba(253,250,245,0.5); transform-origin: center;
+}
+.menu-close span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.menu-close span:nth-child(2) { transform: translateY(-7.5px) rotate(-45deg); }
+
+.menu-nav {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; gap: 0;
+}
+.menu-nav a {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 7vw, 64px); font-weight: 800;
+  line-height: 1.1; color: rgba(253,250,245,0.18);
+  text-decoration: none; letter-spacing: -0.01em;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(253,250,245,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+  transition: color 0.3s ease;
+}
+.menu-nav a:hover { color: rgba(253,250,245,0.92); }
+.menu-arr {
+  font-size: 0.45em; letter-spacing: 0;
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.menu-nav a:hover .menu-arr { opacity: 1; transform: translateX(0); }
+
+/* ── Search ── */
+.menu-search-wrap {
+  padding: 0 0 24px;
+  border-bottom: 1px solid rgba(253,250,245,0.06);
+  margin-bottom: 16px;
+}
+.menu-search-inner {
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid rgba(253,250,245,0.25);
+  padding-bottom: 8px;
+}
+.search-icon {
+  width: 20px; height: 20px; flex-shrink: 0;
+  color: rgba(253,250,245,0.4);
+}
+.menu-search-input {
+  flex: 1; background: none; border: none; outline: none;
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 3vw, 18px);
+  letter-spacing: 0.05em;
+  color: rgba(253,250,245,0.85);
+  padding: 4px 0;
+}
+.menu-search-input::placeholder { color: rgba(253,250,245,0.25); }
+.menu-search-input::-webkit-search-cancel-button { display: none; }
+
+:global(.search-results) {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 0;
+  max-height: 240px; overflow-y: auto;
+}
+:global(.search-results:empty) { display: none; }
+:global(.search-result-item a) {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(253,250,245,0.06);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+:global(.search-result-item a:hover) { opacity: 0.7; }
+:global(.search-result-title) {
+  font-family: var(--font-sans);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(253,250,245,0.85);
+}
+:global(.search-result-excerpt) {
+  font-family: var(--font-sans);
+  font-size: 11px; line-height: 1.6;
+  color: rgba(253,250,245,0.35);
+}
+:global(.search-result-excerpt mark) {
+  background: none;
+  color: rgba(253,250,245,0.85);
+  font-weight: 600;
+}
+:global(.search-no-result) {
+  font-family: var(--font-sans);
+  font-size: 11px; letter-spacing: 0.1em;
+  color: rgba(253,250,245,0.25);
+  padding: 16px 0;
+}
+
+.menu-foot {
+  display: flex; justify-content: space-between; padding-top: 28px;
+  font-family: var(--font-sans); font-size: 8px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(253,250,245,0.2);
+}
+
+@media (max-width: 700px) {
+  .site-header { padding: 18px 20px; }
+  .logo-img { height: 38px; }
+  .menu-overlay { padding: 18px 20px 40px; }
+}
+</style>
+
+<script>
+const overlay  = document.getElementById('menuOverlay')!
+const openBtn  = document.getElementById('menuOpen')!
+const closeBtn = document.getElementById('menuClose')!
+
+function openMenu() {
+  overlay.classList.add('open')
+  openBtn.classList.add('open')
+  openBtn.setAttribute('aria-expanded', 'true')
+  overlay.setAttribute('aria-hidden', 'false')
+  document.body.style.overflow = 'hidden'
+}
+function closeMenu() {
+  overlay.classList.remove('open')
+  openBtn.classList.remove('open')
+  openBtn.setAttribute('aria-expanded', 'false')
+  overlay.setAttribute('aria-hidden', 'true')
+  document.body.style.overflow = ''
+}
+
+openBtn.addEventListener('click', openMenu)
+closeBtn.addEventListener('click', closeMenu)
+overlay.querySelectorAll('.menu-nav a').forEach(a => a.addEventListener('click', closeMenu))
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu() })
+
+// ── Pagefind Search ──
+const searchInput = document.getElementById('menuSearchInput') as HTMLInputElement
+const resultsList = document.getElementById('menuSearchResults') as HTMLUListElement
+
+let pagefind: any = null
+
+async function loadPagefind() {
+  if (pagefind) return
+  try {
+    const load = new Function('url', 'return import(url)')
+    pagefind = await load('/pagefind/pagefind.js')
+    await pagefind.init()
+  } catch {
+    pagefind = null
+  }
+}
+
+async function runSearch(query: string) {
+  resultsList.innerHTML = ''
+  if (!query.trim()) return
+
+  if (!pagefind) {
+    resultsList.innerHTML = '<li class="search-no-result">検索インデックスを読み込み中...</li>'
+    await loadPagefind()
+    if (!pagefind) {
+      resultsList.innerHTML = '<li class="search-no-result">検索インデックスが見つかりません（ビルド後に有効になります）</li>'
+      return
+    }
+  }
+
+  const results = await pagefind.search(query)
+  if (results.results.length === 0) {
+    resultsList.innerHTML = '<li class="search-no-result">該当する記事が見つかりませんでした</li>'
+    return
+  }
+
+  const items = await Promise.all(results.results.slice(0, 6).map((r: any) => r.data()))
+  resultsList.innerHTML = items.map(item => `
+    <li class="search-result-item">
+      <a href="${item.url}" onclick="document.getElementById('menuOverlay').classList.remove('open');document.getElementById('menuOpen').classList.remove('open');document.getElementById('menuOpen').setAttribute('aria-expanded','false');document.getElementById('menuOverlay').setAttribute('aria-hidden','true');document.body.style.overflow=''">
+        <span class="search-result-title">${item.meta?.title ?? item.url}</span>
+        <span class="search-result-excerpt">${item.excerpt}</span>
+      </a>
+    </li>
+  `).join('')
+}
+
+let debounceTimer: ReturnType<typeof setTimeout>
+searchInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => runSearch(searchInput.value), 300)
+})
+
+// メニューを開いたときに検索を初期化
+openBtn.addEventListener('click', loadPagefind)
+</script>

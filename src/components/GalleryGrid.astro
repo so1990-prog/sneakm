@@ -1,0 +1,134 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  posts: CollectionEntry<'posts'>[]
+}
+
+const { posts } = Astro.props
+
+const categoryLabel: Record<string, string> = {
+  newbalance: 'New Balance',
+  shoes: 'Shoes',
+  bag: 'Bag',
+  apparel: 'Apparel',
+  favorite: 'Favorite',
+  gadget: 'Gadget',
+}
+---
+
+<div class="gallery">
+  {posts.map((post, i) => {
+    const { title, type, category, cover, coverAlt } = post.data
+    const isNote = type === 'note'
+    return (
+      <a href={`/${post.slug}`} class="gcard">
+        <div class="gcard-ph" style={!cover ? `background:var(--ph-color-${(i % 6) + 1})` : ''}>
+          {cover
+            ? <Image src={cover} alt={coverAlt ?? title} widths={[600, 900]} class="gcard-img" />
+            : <span class="gcard-ph-label">{category.toUpperCase()}</span>
+          }
+        </div>
+        <span class:list={['gcard-tag', isNote && 'gcard-tag--note']}>
+          {isNote ? 'NOTE' : (categoryLabel[category] ?? category)}
+        </span>
+        <div class="gcard-overlay">
+          <div class:list={['gcard-type', isNote && 'note-type']}>
+            {category.toUpperCase()}
+          </div>
+          <div class="gcard-title">{title}</div>
+          <div class="gcard-arrow">{isNote ? 'Note で読む →' : 'Read more →'}</div>
+        </div>
+      </a>
+    )
+  })}
+</div>
+
+<style>
+:root {
+  --ph-color-1: #ddd7cd;
+  --ph-color-2: #ccd3d8;
+  --ph-color-3: #d8d0c8;
+  --ph-color-4: #c9d5ca;
+  --ph-color-5: #e0d4c4;
+  --ph-color-6: #d4cde0;
+}
+
+.gallery {
+  display: block;
+  columns: 2;
+  column-gap: 2px;
+  margin-bottom: 56px;
+  padding: 0 32px;
+}
+
+.gcard {
+  break-inside: avoid;
+  margin-bottom: 2px;
+  position: relative; overflow: hidden;
+  cursor: pointer; text-decoration: none; display: block;
+}
+
+/* aspect-ratio を7パターンで循環 */
+.gcard:nth-child(7n+1) { aspect-ratio: 3/4; }
+.gcard:nth-child(7n+2) { aspect-ratio: 1/1; }
+.gcard:nth-child(7n+3) { aspect-ratio: 2/3; }
+.gcard:nth-child(7n+4) { aspect-ratio: 16/9; }
+.gcard:nth-child(7n+5) { aspect-ratio: 4/5; }
+.gcard:nth-child(7n+6) { aspect-ratio: 3/4; }
+.gcard:nth-child(7n+0) { aspect-ratio: 4/3; }
+
+.gcard-ph {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.6s ease;
+}
+.gcard-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.gcard:hover .gcard-img,
+.gcard:hover .gcard-ph { transform: scale(1.04); }
+.gcard-ph-label {
+  font-family: var(--font-sans); font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(28,18,8,0.28);
+}
+
+.gcard-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,18,8,.82) 0%, rgba(28,18,8,.1) 55%, transparent 100%);
+  opacity: 0; transition: opacity 0.35s ease;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 18px 20px;
+}
+.gcard:hover .gcard-overlay { opacity: 1; }
+
+.gcard-type {
+  font-family: var(--font-sans); font-size: 8px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(253,250,245,0.65); margin-bottom: 5px;
+}
+.gcard-type.note-type { color: #e8a07a; }
+.gcard-title { font-size: 13px; font-weight: 700; line-height: 1.5; color: #fdfaf5; }
+.gcard-arrow {
+  margin-top: 8px; font-family: var(--font-sans); font-size: 9px;
+  color: rgba(253,250,245,0.55); letter-spacing: 0.12em;
+}
+
+.gcard-tag {
+  position: absolute; top: 14px; left: 14px;
+  font-family: var(--font-sans); font-size: 8px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  background: rgba(253,250,245,0.88); color: var(--ink);
+  padding: 3px 9px; border-radius: 999px;
+  transition: opacity 0.3s;
+}
+.gcard-tag--note { background: var(--rust); color: #fdfaf5; }
+.gcard:hover .gcard-tag { opacity: 0; }
+
+@media (max-width: 700px) {
+  .gallery { padding: 0; }
+}
+</style>

@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ArticleCard from '../../components/ArticleCard.astro'
+
+export async function getStaticPaths() {
+  const categories = ['newbalance', 'shoes', 'bag', 'apparel', 'favorite', 'gadget'] as const
+  return categories.map(category => ({ params: { category } }))
+}
+
+const { category } = Astro.params
+
+const categoryLabel: Record<string, string> = {
+  newbalance: 'New Balance',
+  shoes: 'Shoes',
+  bag: 'Bag',
+  apparel: 'Apparel',
+  favorite: 'Favorite',
+  gadget: 'Gadget',
+}
+
+const posts = (await getCollection('posts', p => p.data.category === category && !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+
+const label = categoryLabel[category] ?? category
+---
+
+<BaseLayout title={`${label} | SNEAKm`}>
+  <div class="cat-hero">
+    <div class="cat-label">Category</div>
+    <h1 class="cat-title">{label}</h1>
+    <div class="cat-count">{posts.length} 記事</div>
+  </div>
+
+  <div class="article-grid">
+    {posts.map(post => <ArticleCard post={post} />)}
+  </div>
+
+  {posts.length === 0 && (
+    <div class="empty">まだ記事がありません。</div>
+  )}
+</BaseLayout>
+
+<style>
+.cat-hero {
+  padding: 56px 32px 32px;
+  border-bottom: 1px solid var(--border);
+}
+.cat-label {
+  font-family: var(--font-sans); font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 12px;
+}
+.cat-title {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 800; letter-spacing: -0.02em;
+}
+.cat-count {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.16em; color: var(--muted); margin-top: 12px;
+}
+
+.article-grid {
+  padding: 32px 32px 64px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.empty {
+  padding: 64px 32px;
+  font-style: italic; color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .cat-hero { padding: 36px 20px 24px; }
+  .article-grid { grid-template-columns: 1fr; padding: 24px 20px 48px; }
+}
+</style>

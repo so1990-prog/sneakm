@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ArticleCard from '../../components/ArticleCard.astro'
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+---
+
+<BaseLayout title="記事一覧 | SNEAKm" description="SNEAKmの全記事一覧です。">
+  <div class="list-hero">
+    <div class="list-label">All Articles</div>
+    <h1 class="list-title">記事一覧</h1>
+    <div class="list-count">{posts.length} 記事</div>
+  </div>
+
+  <div class="article-grid">
+    {posts.map(post => <ArticleCard post={post} />)}
+  </div>
+</BaseLayout>
+
+<style>
+.list-hero {
+  padding: 56px 32px 32px;
+  border-bottom: 1px solid var(--border);
+}
+.list-label {
+  font-family: var(--font-sans); font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 12px;
+}
+.list-title {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 800; letter-spacing: -0.02em;
+}
+.list-count {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.16em; color: var(--muted); margin-top: 12px;
+}
+
+.article-grid {
+  padding: 32px 32px 64px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+@media (max-width: 700px) {
+  .list-hero { padding: 36px 20px 24px; }
+  .article-grid { grid-template-columns: 1fr; padding: 24px 20px 48px; }
+}
+</style>

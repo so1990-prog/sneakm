@@ -1,0 +1,103 @@
+---
+interface Props {
+  name?: string
+  brand?: string
+  amazonUrl?: string
+  rakutenUrl?: string
+  yahooUrl?: string
+  officialUrl?: string
+}
+
+const { name, brand, amazonUrl, rakutenUrl, yahooUrl, officialUrl } = Astro.props
+---
+
+<div class="rinker">
+  {(name || brand) && (
+    <div class="rinker-info">
+      {brand && <span class="rinker-brand">{brand}</span>}
+      {name && <span class="rinker-name">{name}</span>}
+    </div>
+  )}
+  <div class="rinker-links">
+    {amazonUrl && (
+      <a href={amazonUrl} target="_blank" rel="noopener noreferrer sponsored" class="rinker-btn amazon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.047-.872-1.234-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.06-1.642-.384-2.294-.385-.579-1.124-.82-1.775-.82-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.549.582l-3.061-.333c-.259-.056-.548-.266-.472-.66C5.97 2.356 8.561 1.5 10.935 1.5c1.21 0 2.791.322 3.745 1.238 1.209 1.129 1.093 2.635 1.093 4.274v3.874c0 1.162.482 1.674 .935 2.301.16.223.195.49-.01.656l-1.554 1.952zm3.5 1.548c-3.959 2.929-9.696 4.5-14.634 4.5-6.919 0-13.147-2.558-17.858-6.815-.37-.334-.04-.792.405-.531 5.087 2.96 11.37 4.741 17.866 4.741 4.379 0 9.194-.909 13.621-2.79.669-.285 1.228.439.6.895z"/></svg>
+        Amazon
+      </a>
+    )}
+    {rakutenUrl && (
+      <a href={rakutenUrl} target="_blank" rel="noopener noreferrer sponsored" class="rinker-btn rakuten">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2v-5h2v5zm0-7h-2V7h2v2z"/></svg>
+        楽天市場
+      </a>
+    )}
+    {yahooUrl && (
+      <a href={yahooUrl} target="_blank" rel="noopener noreferrer sponsored" class="rinker-btn yahoo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+        Yahoo!
+      </a>
+    )}
+    {officialUrl && (
+      <a href={officialUrl} target="_blank" rel="noopener noreferrer" class="rinker-btn official">
+        公式
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+.rinker {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 32px 0;
+  background: var(--bg, #fff);
+}
+.rinker-info {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rinker-brand {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rinker-name {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.rinker-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rinker-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  transition: opacity 0.15s;
+  color: #fff;
+}
+.rinker-btn:hover { opacity: 0.85; }
+.amazon  { background: #E07800; }
+.rakuten { background: #BF0000; }
+.yahoo   { background: #6001D2; }
+.official { background: var(--ink); }
+
+@media (max-width: 480px) {
+  .rinker-btn { font-size: 10px; padding: 6px 12px; }
+}
+</style>

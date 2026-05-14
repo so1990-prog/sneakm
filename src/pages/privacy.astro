@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="プライバシーポリシー / 免責事項 | SNEAKm"
+  description="SNEAKmのプライバシーポリシーおよび免責事項について"
+>
+  <div class="privacy-container">
+
+    <header class="privacy-header">
+      <p class="privacy-label">Legal</p>
+      <h1 class="privacy-title">プライバシーポリシー<br />/ 免責事項</h1>
+    </header>
+
+    <div class="privacy-body">
+
+      <section>
+        <h2>広告について</h2>
+        <p>当サイトはAmazonアソシエイト・楽天アフィリエイト・バリューコマース等のアフィリエイトプログラムに参加しています。記事内のリンクから商品を購入いただいた場合、当サイトに報酬が発生することがあります。これは読者の方への料金負担を一切伴いません。</p>
+        <p>広告収益はサイトの運営・維持に充てられます。掲載商品の選定および評価は広告主の意向に左右されず、筆者の独自の判断によるものです。</p>
+      </section>
+
+      <section>
+        <h2>アクセス解析について</h2>
+        <p>当サイトではGoogle Analytics 4を使用してアクセス解析を行っています。このツールはCookieを使用してデータを収集しますが、個人を特定する情報は含まれません。収集されるデータはGoogleのプライバシーポリシーに基づいて管理されます。</p>
+      </section>
+
+      <section>
+        <h2>免責事項</h2>
+        <p>当サイトに掲載する情報は、執筆時点での筆者の個人的な見解・体験に基づくものです。商品の価格・仕様・在庫状況は予告なく変更される場合があります。最新の情報は各販売店・メーカーの公式サイトにてご確認ください。</p>
+        <p>当サイトの情報を参考にした結果生じた損害について、筆者は一切の責任を負いかねます。</p>
+      </section>
+
+      <section>
+        <h2>著作権</h2>
+        <p>当サイトに掲載されているテキスト・画像等のコンテンツの無断転載・複製を禁止します。引用の場合は出典を明記してください。</p>
+      </section>
+
+      <section>
+        <h2>お問い合わせ</h2>
+        <p>当サイトに関するお問い合わせは各SNSのDMよりお願いします。</p>
+      </section>
+
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+.privacy-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 32px 120px;
+}
+
+.privacy-header {
+  margin-bottom: 64px;
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 40px;
+}
+.privacy-label {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.privacy-title {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.privacy-body {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.privacy-body section h2 {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.privacy-body section p {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink);
+  margin-bottom: 1em;
+}
+.privacy-body section p:last-child { margin-bottom: 0; }
+
+@media (max-width: 700px) {
+  .privacy-container { padding: 40px 20px 80px; }
+}
+</style>
