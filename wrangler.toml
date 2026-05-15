@@ -1,6 +1,4 @@
 name = "sneakm"
 compatibility_date = "2025-05-14"
-main = "src/worker.js"
-
 [assets]
 directory = "./dist"
