@@ -97,6 +97,16 @@ const breadcrumbLd = {
         <span class="promo-line"></span>
       </div>
 
+      <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener" class="hukuya-top-bar">
+        <span class="hukuya-top-eyebrow">New store open</span>
+        <span class="hukuya-top-name">HUKUYA</span>
+        <span class="hukuya-top-sub">ヴィンテージ・ユーズド古着 — Shop &amp; Instagram</span>
+        <span class="hukuya-top-links">
+          <span>Shop →</span>
+          <a href="https://www.instagram.com/hukuya_hukuya/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Instagram →</a>
+        </span>
+      </a>
+
       <div class="post-body">
         <slot />
       </div>
@@ -141,6 +151,51 @@ const breadcrumbLd = {
 </BaseLayout>
 
 <style>
+/* ── 記事上部バー ── */
+.hukuya-top-bar {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: var(--ink); color: #fdfaf5;
+  padding: 14px 20px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.hukuya-top-bar:hover { opacity: 0.85; }
+.hukuya-top-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(253,250,245,0.45); white-space: nowrap;
+}
+.hukuya-top-name {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 800;
+  letter-spacing: -0.01em; line-height: 1;
+  color: #fdfaf5;
+}
+.hukuya-top-sub {
+  font-family: var(--font-sans);
+  font-size: 10px; letter-spacing: 0.08em;
+  color: rgba(253,250,245,0.5); flex: 1;
+}
+.hukuya-top-links {
+  display: flex; gap: 12px; margin-left: auto; flex-shrink: 0;
+}
+.hukuya-top-links span,
+.hukuya-top-links a {
+  font-family: var(--font-sans);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #fdfaf5; text-decoration: none;
+  border: 1px solid rgba(253,250,245,0.4);
+  padding: 6px 14px; white-space: nowrap;
+  transition: background 0.2s;
+}
+.hukuya-top-links a:hover { background: rgba(253,250,245,0.15); }
+@media (max-width: 600px) {
+  .hukuya-top-sub { display: none; }
+  .hukuya-top-bar { gap: 10px; }
+}
+
+/* ── 記事末尾ブロック ── */
 .hukuya-block {
   margin: 56px 0 0;
   border: 1.5px solid var(--ink);
@@ -181,7 +236,7 @@ const breadcrumbLd = {
   white-space: nowrap;
 }
 .hukuya-btn-shop {
-  background: var(--ink); color: var(--bg);
+  background: var(--ink); color: #fdfaf5;
 }
 .hukuya-btn-shop:hover { opacity: 0.75; }
 .hukuya-btn-ig {
