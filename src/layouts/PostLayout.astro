@@ -118,6 +118,14 @@ const breadcrumbLd = {
         </aside>
       )}
 
+      <div class="hukuya-banner">
+        <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener">
+          <span class="hukuya-label">Also runs</span>
+          <span class="hukuya-name">HUKUYA</span>
+          <span class="hukuya-sub">vintage &amp; used clothing →</span>
+        </a>
+      </div>
+
       <footer class="post-footer">
         <a href="/" class="back-link">← トップへ戻る</a>
       </footer>
@@ -127,6 +135,33 @@ const breadcrumbLd = {
 </BaseLayout>
 
 <style>
+.hukuya-banner {
+  margin: 48px 0 0;
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+.hukuya-banner a {
+  display: inline-flex; align-items: baseline; gap: 12px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.hukuya-banner a:hover { opacity: 0.6; }
+.hukuya-label {
+  font-family: var(--font-sans);
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+}
+.hukuya-name {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 4vw, 28px); font-weight: 800;
+  letter-spacing: -0.01em; color: var(--ink);
+}
+.hukuya-sub {
+  font-family: var(--font-sans);
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
 .post { max-width: 100%; }
 
 .breadcrumb {
