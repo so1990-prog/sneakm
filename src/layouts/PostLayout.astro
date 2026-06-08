@@ -118,12 +118,18 @@ const breadcrumbLd = {
         </aside>
       )}
 
-      <div class="hukuya-banner">
-        <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener">
-          <span class="hukuya-label">Also runs</span>
-          <span class="hukuya-name">HUKUYA</span>
-          <span class="hukuya-sub">vintage &amp; used clothing →</span>
-        </a>
+      <div class="hukuya-block">
+        <div class="hukuya-block-inner">
+          <div class="hukuya-block-text">
+            <span class="hukuya-block-eyebrow">New store open</span>
+            <strong class="hukuya-block-name">HUKUYA</strong>
+            <p class="hukuya-block-desc">ヴィンテージ・ユーズド古着のオンラインショップをオープンしました。スニーカーと同じ目線で選んだ服を揃えています。</p>
+          </div>
+          <div class="hukuya-block-btns">
+            <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener" class="hukuya-btn hukuya-btn-shop">Shop →</a>
+            <a href="https://www.instagram.com/hukuya_hukuya/" target="_blank" rel="noopener" class="hukuya-btn hukuya-btn-ig">Instagram →</a>
+          </div>
+        </div>
       </div>
 
       <footer class="post-footer">
@@ -135,31 +141,57 @@ const breadcrumbLd = {
 </BaseLayout>
 
 <style>
-.hukuya-banner {
-  margin: 48px 0 0;
-  border-top: 1px solid var(--border);
-  padding-top: 32px;
+.hukuya-block {
+  margin: 56px 0 0;
+  border: 1.5px solid var(--ink);
 }
-.hukuya-banner a {
-  display: inline-flex; align-items: baseline; gap: 12px;
-  text-decoration: none;
-  transition: opacity 0.2s;
+.hukuya-block-inner {
+  padding: 32px 36px;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  flex-wrap: wrap;
 }
-.hukuya-banner a:hover { opacity: 0.6; }
-.hukuya-label {
+.hukuya-block-text {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.hukuya-block-eyebrow {
   font-family: var(--font-sans);
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--muted);
 }
-.hukuya-name {
+.hukuya-block-name {
   font-family: var(--font-serif);
-  font-size: clamp(20px, 4vw, 28px); font-weight: 800;
-  letter-spacing: -0.01em; color: var(--ink);
+  font-size: clamp(28px, 5vw, 40px); font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1; color: var(--ink);
 }
-.hukuya-sub {
+.hukuya-block-desc {
   font-family: var(--font-sans);
-  font-size: 11px; letter-spacing: 0.1em;
-  color: var(--muted);
+  font-size: 12px; line-height: 1.8; letter-spacing: 0.04em;
+  color: var(--muted); max-width: 380px; margin: 0;
+}
+.hukuya-block-btns {
+  display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;
+}
+.hukuya-btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.hukuya-btn-shop {
+  background: var(--ink); color: var(--bg);
+}
+.hukuya-btn-shop:hover { opacity: 0.75; }
+.hukuya-btn-ig {
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.hukuya-btn-ig:hover { background: var(--ink); color: var(--bg); }
+@media (max-width: 600px) {
+  .hukuya-block-inner { padding: 24px 20px; }
+  .hukuya-block-btns { flex-direction: row; }
 }
 
 .post { max-width: 100%; }
