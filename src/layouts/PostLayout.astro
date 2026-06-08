@@ -97,15 +97,15 @@ const breadcrumbLd = {
         <span class="promo-line"></span>
       </div>
 
-      <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener" class="hukuya-top-bar">
+      <div class="hukuya-top-bar">
         <span class="hukuya-top-eyebrow">New store open</span>
         <span class="hukuya-top-name">HUKUYA</span>
-        <span class="hukuya-top-sub">ヴィンテージ・ユーズド古着 — Shop &amp; Instagram</span>
+        <span class="hukuya-top-sub">ヴィンテージ・ユーズド古着</span>
         <span class="hukuya-top-links">
-          <span>Shop →</span>
-          <a href="https://www.instagram.com/hukuya_hukuya/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Instagram →</a>
+          <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener">Shop →</a>
+          <a href="https://www.instagram.com/hukuya_hukuya/" target="_blank" rel="noopener">Instagram →</a>
         </span>
-      </a>
+      </div>
 
       <div class="post-body">
         <slot />
@@ -157,10 +157,7 @@ const breadcrumbLd = {
   background: var(--ink); color: #fdfaf5;
   padding: 14px 20px;
   margin-bottom: 40px;
-  text-decoration: none;
-  transition: opacity 0.2s;
 }
-.hukuya-top-bar:hover { opacity: 0.85; }
 .hukuya-top-eyebrow {
   font-family: var(--font-sans);
   font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
