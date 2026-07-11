@@ -97,17 +97,7 @@ const breadcrumbLd = {
         <span class="promo-line"></span>
       </div>
 
-      <div class="hukuya-top-bar">
-        <span class="hukuya-top-eyebrow">New store open</span>
-        <span class="hukuya-top-name">HUKUYA</span>
-        <span class="hukuya-top-sub">ヴィンテージ・ユーズド古着</span>
-        <span class="hukuya-top-links">
-          <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener">Shop →</a>
-          <a href="https://www.instagram.com/hukuya_hukuya/" target="_blank" rel="noopener">Instagram →</a>
-        </span>
-      </div>
-
-      <div class="post-body">
+<div class="post-body">
         <slot />
       </div>
 
@@ -128,21 +118,7 @@ const breadcrumbLd = {
         </aside>
       )}
 
-      <div class="hukuya-block">
-        <div class="hukuya-block-inner">
-          <div class="hukuya-block-text">
-            <span class="hukuya-block-eyebrow">New store open</span>
-            <strong class="hukuya-block-name">HUKUYA</strong>
-            <p class="hukuya-block-desc">ヴィンテージ・ユーズド古着のオンラインショップをオープンしました。スニーカーと同じ目線で選んだ服を揃えています。</p>
-          </div>
-          <div class="hukuya-block-btns">
-            <a href="https://hukuya-2.myshopify.com/" target="_blank" rel="noopener" class="hukuya-btn hukuya-btn-shop">Shop →</a>
-            <a href="https://www.instagram.com/hukuya_hukuya/" target="_blank" rel="noopener" class="hukuya-btn hukuya-btn-ig">Instagram →</a>
-          </div>
-        </div>
-      </div>
-
-      <footer class="post-footer">
+<footer class="post-footer">
         <a href="/" class="back-link">← トップへ戻る</a>
       </footer>
     </div>
@@ -151,101 +127,6 @@ const breadcrumbLd = {
 </BaseLayout>
 
 <style>
-/* ── 記事上部バー ── */
-.hukuya-top-bar {
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-  background: var(--ink); color: #fdfaf5;
-  padding: 14px 20px;
-  margin-bottom: 40px;
-}
-.hukuya-top-eyebrow {
-  font-family: var(--font-sans);
-  font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
-  color: rgba(253,250,245,0.45); white-space: nowrap;
-}
-.hukuya-top-name {
-  font-family: var(--font-serif);
-  font-size: 22px; font-weight: 800;
-  letter-spacing: -0.01em; line-height: 1;
-  color: #fdfaf5;
-}
-.hukuya-top-sub {
-  font-family: var(--font-sans);
-  font-size: 10px; letter-spacing: 0.08em;
-  color: rgba(253,250,245,0.5); flex: 1;
-}
-.hukuya-top-links {
-  display: flex; gap: 12px; margin-left: auto; flex-shrink: 0;
-}
-.hukuya-top-links span,
-.hukuya-top-links a {
-  font-family: var(--font-sans);
-  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: #fdfaf5; text-decoration: none;
-  border: 1px solid rgba(253,250,245,0.4);
-  padding: 6px 14px; white-space: nowrap;
-  transition: background 0.2s;
-}
-.hukuya-top-links a:hover { background: rgba(253,250,245,0.15); }
-@media (max-width: 600px) {
-  .hukuya-top-sub { display: none; }
-  .hukuya-top-bar { gap: 10px; }
-}
-
-/* ── 記事末尾ブロック ── */
-.hukuya-block {
-  margin: 56px 0 0;
-  border: 1.5px solid var(--ink);
-}
-.hukuya-block-inner {
-  padding: 32px 36px;
-  display: flex; align-items: center; justify-content: space-between; gap: 32px;
-  flex-wrap: wrap;
-}
-.hukuya-block-text {
-  display: flex; flex-direction: column; gap: 10px;
-}
-.hukuya-block-eyebrow {
-  font-family: var(--font-sans);
-  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--muted);
-}
-.hukuya-block-name {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 5vw, 40px); font-weight: 800;
-  letter-spacing: -0.02em; line-height: 1; color: var(--ink);
-}
-.hukuya-block-desc {
-  font-family: var(--font-sans);
-  font-size: 12px; line-height: 1.8; letter-spacing: 0.04em;
-  color: var(--muted); max-width: 380px; margin: 0;
-}
-.hukuya-block-btns {
-  display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;
-}
-.hukuya-btn {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  text-decoration: none;
-  padding: 12px 24px;
-  transition: background 0.2s, color 0.2s;
-  white-space: nowrap;
-}
-.hukuya-btn-shop {
-  background: var(--ink); color: #fdfaf5;
-}
-.hukuya-btn-shop:hover { opacity: 0.75; }
-.hukuya-btn-ig {
-  background: transparent; color: var(--ink);
-  border: 1px solid var(--ink);
-}
-.hukuya-btn-ig:hover { background: var(--ink); color: var(--bg); }
-@media (max-width: 600px) {
-  .hukuya-block-inner { padding: 24px 20px; }
-  .hukuya-block-btns { flex-direction: row; }
-}
-
 .post { max-width: 100%; }
 
 .breadcrumb {
